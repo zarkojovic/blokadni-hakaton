@@ -8,7 +8,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 const form = useForm({
-    file: null,
+    elaboratFile: null,
 });
 
 const fileInput = ref(null);
@@ -21,36 +21,47 @@ const allowedTypes = [
 
 const validate = () => {
     var isValid = true;
-    if (!form.file) {
-        form.errors.file = 'The file field is required.';
+    if (!form.elaboratFile) {
+        form.errors.elaboratFile = 'The file field is required.';
         isValid = false;
     }
-    if (form.file && form.file.size > 2 * 1024 * 1024) {
-        form.errors.file = 'The file may not be greater than 2MB.';
+    if (form.elaboratFile && form.elaboratFile.size > 10 * 1024 * 1024) {
+        form.errors.elaboratFile = 'The file may not be greater than 2MB.';
         isValid = false;
     }
-    if (form.file && !allowedTypes.includes(form.file.type)) {
-        form.errors.file = 'The file must be a file of type: pdf, doc, docx.';
+    if (form.elaboratFile && !allowedTypes.includes(form.elaboratFile.type)) {
+        form.errors.elaboratFile = 'The file must be a file of type: pdf, doc, docx.';
         isValid = false;
     }
     return isValid;
 };
 
+const responseText = ref('');
+
 const handleFileChange = () => {
-    form.file = fileInput.value.files[0];
+    form.elaboratFile = fileInput.value.files[0];
 };
+
+const idiotLink = ref('');
+const tabelarView = ref('');
 
 const submit = () => {
     if (!validate()) {
         return;
     }
-
     form.post(route('gemini.documents'), {
         preserveScroll: true,
         onSuccess: (page) => {
-            console.log(page.props.response);
+            const {fileIdiot, fileTabular} = page.props;
+
+            idiotLink.value = fileIdiot;
+            tabelarView.value = fileTabular;
             form.reset();
-            fileInput.value.value = '';
+            fileInput.value = '';
+        },
+        onError: (errors) => {
+            form.errors = errors;
+            console.log(errors);
         },
     });
 };
@@ -73,19 +84,26 @@ const submit = () => {
                         <h1 class="text-xl font-bold text-gray-900 dark:text-gray-100">Generisi dokumente potrebne za
                             Krovnu radnu grupu</h1>
 
-                        <form @submit.prevent="submit" class="mt-6 space-y-6">
+                        <form @submit.prevent="submit" class="mt-6 space-y-6" enctype="multipart/form-data">
                             <div>
                                 <InputLabel for="file" value="Dokument"/>
 
-                                <input type="file" name="file" id="file" ref="fileInput" @change="handleFileChange"/>
+                                <input type="file" name="elaboratFile" id="elaboratFile" ref="fileInput"
+                                       @change="handleFileChange"/>
 
-                                <InputError class="mt-2" :message="form.errors.file"/>
+                                <InputError class="mt-2" :message="form.errors.elaboratFile"/>
                             </div>
 
                             <PrimaryButton class="mt-6" @click="submit" :disabled="form.processing">
                                 Generisi dokumente
                             </PrimaryButton>
                         </form>
+
+
+                        <a v-if="idiotLink" :href="idiotLink" target="_blank" class="mt-6 block text-blue-500 underline">Idiot
+                            link</a>
+                        <a v-if="tabelarView" :href="tabelarView" target="_blank" class="mt-6 block text-blue-500 underline">Tabelar
+                            view</a>
                     </div>
                 </div>
             </div>
