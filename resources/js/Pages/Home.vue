@@ -51,8 +51,9 @@ import Form from '@/Pages/Steps/Form.vue';
 <!--            </div>-->
 <!--        </div>-->
 <!--    </div>-->
-
-    <StepperLayout>
-        <Form></Form>
-    </StepperLayout>
+    <div class="w-8/12 mx-auto mt-10">
+        <StepperLayout>
+            <Form></Form>
+        </StepperLayout>
+    </div>
 </template>
