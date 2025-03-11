@@ -26,6 +26,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/gemini', [GeminiController::class, 'generate']);
+Route::post('/gemini-document', [GeminiController::class, 'generateDocuments'])->name('gemini.documents');
 
 require __DIR__.'/auth.php';

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\GeminiService;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class GeminiController extends Controller
 {
@@ -14,10 +15,10 @@ class GeminiController extends Controller
         $this->geminiService = $geminiService;
     }
 
-    public function generate(Request $request)
+    public function generateDocuments(Request $request)
     {
         $response = $this->geminiService->generateResponse("Explain laravel in simple terms");
 
-        return response()->json(['response' => $response]);
+        return Inertia::render('Dashboard', ['response' => $response]);
     }
 }
