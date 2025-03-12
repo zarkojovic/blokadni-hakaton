@@ -51,9 +51,7 @@ class GeminiController extends Controller {
     public function generateDocumentsFromText(
         GenerateDocumentsFromTextRequest $request
     ) {
-        $prompt = $request->input('idiot').'%%%'.$request->input('tabular');
-
-        $fileUrls = $this->documentService->generateDocuments($prompt);
+        $fileUrls = $this->documentService->generateDoucmentsFromText($request->validated());
 
         // Return Inertia response with file URLs
         return Inertia::render('Home', $fileUrls);

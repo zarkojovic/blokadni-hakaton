@@ -131,7 +131,7 @@ const tabelarView = ref('');
 
 const finishDocuments = () => {
     generateDocumentsForm.idiot = title.value + '###' + data.value;
-    generateDocumentsForm.tabular = tabularText.value;
+    generateDocumentsForm.tabular = tableData.value;
 
     generateDocumentsForm.post(route('gemini.text.documents'), {
         preserveScroll: true,
@@ -154,6 +154,16 @@ const restartForm = () => {
 
 const emptyTableData = ref(false);
 
+const editingKey = ref(null);
+
+const handleEdit = (key) => {
+    editingKey.value = key;
+};
+
+const handleChange = (event, key) => {
+    tableData.value[key] = event.target.value;
+    editingKey.value = null;
+};
 </script>
 
 <template>
@@ -278,7 +288,15 @@ const emptyTableData = ref(false);
                             <tbody>
                             <tr v-for="(value, key) in tableData" :key="key" class="border-t border-gray-200">
                                 <td class="px-4 py-2 text-gray-800">{{ key }}</td>
-                                <td class="px-4 py-2 text-gray-800">{{ value }}</td>
+                                <td class="px-4 py-2 text-gray-800" @click="handleEdit(key)">
+                                    <template v-if="editingKey === key">
+                                        <input type="text" :value="value" @change="event => handleChange(event, key)"
+                                               class="border p-1 w-full"/>
+                                    </template>
+                                    <template v-else>
+                                        {{ value }}
+                                    </template>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

@@ -40,6 +40,16 @@ class DocumentService {
         ];
     }
 
+    public function generateDoucmentsFromText($response) {
+        $fileIdiot = $this->generateIdiotDocument($response['idiot']);
+        $fileTabular = $this->generateTabularOverviewDocument($response['tabular']);
+
+        return [
+            'fileIdiot' => $fileIdiot,
+            'fileTabular' => $fileTabular,
+        ];
+    }
+
     private function generateIdiotDocument($response) {
         // Create a new PhpWord object
         $phpWord = new PhpWord();
@@ -82,9 +92,13 @@ class DocumentService {
         // Create a new PhpWord object
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
-        // Parse text into key-value array
-        $tableValues = $this->parseTextToKeyValueArray($response);
-
+        if (!is_array($response)) {
+            // Parse text into key-value array
+            $tableValues = $this->parseTextToKeyValueArray($response);
+        }
+        else {
+            $tableValues = $response;
+        }
         // Generate timestamp
         $timestamp = \Carbon\Carbon::now()->format('Ymd_His');
 
