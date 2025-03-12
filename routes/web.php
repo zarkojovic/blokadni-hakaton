@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function() {
 
     Route::get('/', function() {
         return Inertia::render('Home');
-    });
+    })->name('home');
 });
 
 Route::post('/gemini-document', [GeminiController::class, 'generateDocuments'])

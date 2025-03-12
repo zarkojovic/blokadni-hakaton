@@ -10,6 +10,7 @@ const active = ref('0');
 </script>
 
 <template>
+    <Head title="About"/>
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">

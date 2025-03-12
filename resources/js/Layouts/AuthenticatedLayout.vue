@@ -34,8 +34,8 @@ const showingNavigationDropdown = ref(false);
                                 class="hidden space-x-8 sm:flex  text-lg"
                             >
                                 <NavLink
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
+                                    :href="route('home')"
+                                    :active="route().current('home')"
                                 >
                                     Elaborator
                                 </NavLink>
@@ -48,9 +48,9 @@ const showingNavigationDropdown = ref(false);
                             >
                                 <NavLink
                                     :href="route('about')"
-                                    :active="route().current('dashboard')"
+                                    :active="route().current('about')"
                                 >
-                                    About
+                                    O Aplikaciji
                                 </NavLink>
                             </div>
                             <!-- Settings Dropdown -->
@@ -152,8 +152,8 @@ const showingNavigationDropdown = ref(false);
                 >
                     <div class="space-y-1 pb-3 pt-2 text-lg">
                         <ResponsiveNavLink
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')"
+                            :href="route('home')"
+                            :active="route().current('home')"
                         >
                             Elaborator
                         </ResponsiveNavLink>
