@@ -53,7 +53,7 @@ import Form from '@/Pages/Steps/Form.vue';
 <!--    </div>-->
     <div class="w-8/12 mx-auto mt-10">
         <StepperLayout>
-            <Form></Form>
+<!--            <Form></Form>-->
         </StepperLayout>
     </div>
 </template>

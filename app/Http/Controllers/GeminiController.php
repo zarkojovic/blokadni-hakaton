@@ -14,6 +14,7 @@ class GeminiController extends Controller {
 
     protected $geminiService;
 
+
     protected $documentService;
 
     public function __construct(
@@ -25,11 +26,21 @@ class GeminiController extends Controller {
     }
 
     public function generateDocuments(GenerateDocumentRequest $request) {
+
         $response = $this->geminiService->generateResponse($request->elaboratFile);
+        if ($request->input('type') == 'content' && $request->isMethod('post') && strpos($request->header('Content-Type'), 'multipart/form-data') !== false) {
+            return response()->json(['content'=>$response]);
+        }
+
         $fileUrls = $this->documentService->generateDocuments($response);
 
+//        if ($request->input('type') == 'table' && $request->isMethod('post') && strpos($request->header('Content-Type'), 'multipart/form-data') !== false) {
+//
+//            return response()->json(['content'=>$fileUrls]);
+//        }
+
         // Return Inertia response with file URLs
-        return Inertia::render('Dashboard', $fileUrls);
+        return Inertia::render('Home', $fileUrls);
     }
 
 }

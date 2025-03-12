@@ -1,13 +1,14 @@
 <script setup>
 import Button from 'primevue/button';
 import StepPanel from 'primevue/steppanel';
-import { ref } from 'vue';
+import { ref,defineEmits } from 'vue';
 import FileUpload from 'primevue/fileupload';
-
+import {useForm} from "@inertiajs/vue3";
+import axios from 'axios';
 const totalSize = ref(0);
 const totalSizePercent = ref(0);
 const filesMy = ref(null);
-
+const activeTab = ref("1");
 const onRemoveTemplatingFile = (file, removeFileCallback, index) => {
     removeFileCallback(index);
     totalSize.value -= parseInt(formatSize(file.size));
@@ -25,11 +26,11 @@ const onSelectedFiles = (event) => {
     filesMy.value = null;
     // Dodati samo jedan fajl u listu
     if (event.files && event.files.length > 0) {
+        form.elaboratFile = event.files[0];
         filesMy.value = event.files[0];
         totalSize.value = parseInt(formatSize(event.files[0].size));
         totalSizePercent.value = totalSize.value / 10;
     }
-    console.log(filesMy.value);
 
 };
 
@@ -37,14 +38,32 @@ const uploadEvent = (callback) => {
     // Uveriti se da je samo jedan fajl izabran pre nego što se otprema
     if (filesMy.value != null) {
         totalSizePercent.value = totalSize.value / 10;
-        callback();
+
+        // Pripremi FormData objekat
+        const formData = new FormData();
+        formData.append('elaboratFile', filesMy.value); // Dodajte fajl
+        formData.append('type', 'content'); // Dodajte fajl
+
+        // Pošaljite zahtev koristeći axios
+        axios.post(route('gemini.documents'), formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data', // Postavljanje headera na multipart/form-data
+            },
+        })
+            .then(response => {
+                // activeTab.value = '2';
+                emit('changeTab','2');
+                console.log(response.data); // Odgovor u JSON formatu, ako server odgovara sa JSON-om
+                // Možete obraditi odgovor ovde, npr. spremiti linkove do fajlova
+            })
+            .catch(error => {
+                console.log(error.response.data); // Obrada grešaka
+            });
     }
 };
 
 const onTemplatedUpload = () => {
-    console.log("Fajl otpremljen");
     // Zamenjujemo prethodni fajl sa novim fajlom
-    console.log(filesMy);
     if (filesMy.value) {
         uploadedFiles.value = null; // Održi samo jedan fajl u nizu
         filesMy.value = null; // Resetuj selektovani fajl
@@ -65,13 +84,19 @@ const formatSize = (bytes) => {
 
     return `${formattedSize} ${sizes[i]}`;
 };
+
+
+const emit = defineEmits(['changeTab']);
+const form = useForm({
+    elaboratFile: null,
+});
 </script>
 
 <template>
     <StepPanel v-slot="{ activateCallback }" value="1">
         <div class="flex flex-col h-48">
             <div class="card">
-                <FileUpload :multiple="false" name="demo[]" url="/api/upload" @upload="onTemplatedUpload" accept=".doc,.docx,.pdf" :maxFileSize="1000000" @select="onSelectedFiles">
+                <FileUpload :multiple="false" @upload="onTemplatedUpload" accept=".doc,.docx,.pdf" :maxFileSize="10000000" @select="onSelectedFiles">
                     <template #header="{ chooseCallback, uploadCallback, clearCallback, files }">
                         <div class="flex flex-wrap justify-between items-center flex-1 gap-4">
                             <div class="flex gap-2">
@@ -81,7 +106,6 @@ const formatSize = (bytes) => {
                             </div>
                         </div>
                     </template>
-                    {{files}}
                     <template #content="{ files, uploadedFiles, removeUploadedFileCallback, removeFileCallback }">
                         <div class="flex flex-col gap-8 pt-4">
                             <div v-if="files.length > 0">
@@ -124,5 +148,8 @@ const formatSize = (bytes) => {
                 </FileUpload>
             </div>
         </div>
+    </StepPanel>
+    <StepPanel v-slot="{ activateCallback }" value="2">
+        <h1>Preview content</h1>
     </StepPanel>
 </template>

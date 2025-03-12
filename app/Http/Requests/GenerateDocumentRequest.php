@@ -23,6 +23,7 @@ class GenerateDocumentRequest extends FormRequest
     {
         return [
             'elaboratFile' => 'required|file|mimes:pdf,docx,doc',
+            'type'=>'string'
         ];
     }
 
