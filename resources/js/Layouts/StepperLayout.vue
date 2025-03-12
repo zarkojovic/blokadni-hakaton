@@ -158,7 +158,7 @@ const emptyTableData = ref(false);
 
 <template>
     <AuthenticatedLayout>
-        <Stepper :value="activeTab" class="basis-[50rem] mt-10 w-8/12 mx-auto   ">
+        <Stepper :value="activeTab" class="basis-[50rem] mt-10 w-8/12 mx-auto">
             <Navigation></Navigation>
             <!--        <main>-->
             <StepPanels class="w-full">
