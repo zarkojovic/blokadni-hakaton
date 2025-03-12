@@ -1,29 +1,31 @@
 {
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "build": "vite build",
-        "dev": "vite"
-    },
-    "devDependencies": {
-        "@inertiajs/vue3": "^2.0.0",
-        "@tailwindcss/forms": "^0.5.3",
-        "@tailwindcss/vite": "^4.0.0",
-        "@vitejs/plugin-vue": "^5.0.0",
-        "autoprefixer": "^10.4.12",
-        "axios": "^1.8.2",
-        "concurrently": "^9.0.1",
-        "laravel-vite-plugin": "^1.2.0",
-        "postcss": "^8.4.31",
-        "tailwindcss": "^3.2.1",
-        "vite": "^6.0.11",
-        "vue": "^3.4.0"
-    },
-    "dependencies": {
-        "@phosphor-icons/vue": "^2.2.1",
-        "@primeuix/themes": "^1.0.0",
-        "primeicons": "^7.0.0",
-        "primevue": "^4.3.1",
-        "tailwindcss-primeui": "^0.5.1"
-    }
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@phosphor-icons/vue": "^2.2.1",
+    "@primeuix/themes": "^1.0.0",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.3.1",
+    "register-service-worker": "^1.7.2",
+    "tailwindcss-primeui": "^0.5.1"
+  },
+  "devDependencies": {
+    "@inertiajs/vue3": "^2.0.0",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/vite": "^4.0.0",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "@vue/cli-plugin-pwa": "~5.0.0",
+    "autoprefixer": "^10.4.12",
+    "axios": "^1.8.2",
+    "concurrently": "^9.0.1",
+    "laravel-vite-plugin": "^1.2.0",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.2.1",
+    "vite": "^6.0.11",
+    "vue": "^3.4.0"
+  },
+  "type": "module"
 }

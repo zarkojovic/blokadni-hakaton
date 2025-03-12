@@ -159,6 +159,7 @@ const emptyTableData = ref(false);
 
 <template>
     <AuthenticatedLayout>
+
         <Stepper :value="activeTab" class="basis-[50rem] mt-10 w-8/12 mx-auto">
             <Navigation></Navigation>
             <!--        <main>-->
@@ -321,4 +322,13 @@ const emptyTableData = ref(false);
             <!--        </main>-->
         </Stepper>
     </AuthenticatedLayout>
+
+
+    <footer class="bg-white rounded-lg shadow-sm m-4 dark:bg-gray-800">
+        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 <a href="https://flowbite.com/" class="hover:underline">Elaborator™</a>. All Rights Reserved.
+    </span>
+        </div>
+    </footer>
+
 </template>
