@@ -22,7 +22,7 @@ const showingNavigationDropdown = ref(false);
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex shrink-0 items-center">
-                                <Link :href="route('dashboard')">
+                                <Link :href="route('home')">
                                     <ApplicationLogo
                                         class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
                                     />
@@ -201,9 +201,20 @@ const showingNavigationDropdown = ref(false);
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="min-h-screen">
                 <slot/>
             </main>
+
+            <footer class="bg-white shadow-sm  dark:bg-gray-800">
+                <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+                    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 Elaborator™. All Rights Reserved.
+                    </span>
+                    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+                        Made with ❤️ by Kojićevi 🐯
+                    </span>
+
+                </div>
+            </footer>
         </div>
     </div>
 </template>
