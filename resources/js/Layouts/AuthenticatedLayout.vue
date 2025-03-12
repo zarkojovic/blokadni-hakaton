@@ -43,6 +43,16 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">
+                            <div
+                                class="hidden space-x-8 sm:flex  text-lg"
+                            >
+                                <NavLink
+                                    :href="route('about')"
+                                    :active="route().current('dashboard')"
+                                >
+                                    About
+                                </NavLink>
+                            </div>
                             <!-- Settings Dropdown -->
                             <div class="relative ms-3">
                                 <Dropdown align="right" width="48">
@@ -86,6 +96,7 @@ const showingNavigationDropdown = ref(false);
                                     </template>
                                 </Dropdown>
                             </div>
+
                         </div>
 
                         <!-- Hamburger -->
