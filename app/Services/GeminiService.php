@@ -19,7 +19,7 @@ class GeminiService {
     public function generateResponse($elaboratFile) {
         $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$this->apiKey";
 
-        $prompt = 'You are an AI assistant specialized in text processing and summarization. Your task is to generate two structured documents from a given elaboration document ("Elaborat"). The first document ("Idiot") is a summary of the elaboration with a limit of 300 words. The second document ("Tabular Overview") is a structured table that organizes the key points from the elaboration document into a predefined format. Instructions: Summarization (Idiot) Generate a concise summary of the elaboration, limited to 300 words. Preserve the key ideas, goals, and strategies while making the text clear and impactful. The summary should logically cover the purpose, timeline, and planned actions of the initiative described in the elaboration. Tabular Overview Extract key information from the elaboration document and format it into a structured text-based table. The table should contain the following sections: Objective Target Audience Estimated Number of Participants Risks Expected Impact Schedule of Events Locations Security Measures Logistics Media Plan The information should be structured as plain text, with each section clearly labeled. Ensure the output is formatted in a way that can be easily converted into a structured file format such as CSV or JSON. Important Requirements: The response should only contain the generated content for "Idiot" and "Tabular Overview". No introductory or explanatory text should be included. The two sections must be separated by a unique delimiter: %%% (three percentage signs). No decorative elements (such as asterisks, dashes, or additional formatting) should be present. The response should be in Serbian Cyrillic. Input: The full text of the elaboration document is provided below. Use this content as the source material for generating the required outputs. Output Format: Idiot (Summary in 300 words) - Serbian Cyrillic %%% (Separator between the two documents) Tabular Overview - Serbian Cyrillic';
+        $prompt = 'You are an AI assistant specialized in text processing and summarization. Your task is to generate two structured documents from a given elaboration document ("Elaborat"). The first document ("Idiot") is a summary of the elaboration with a limit of 300 words. The second document ("Tabular Overview") is a structured table that organizes the key points from the elaboration document into a predefined format. Instructions: Summarization (Idiot) Generate a concise summary of the elaboration, limited to 300 words. Preserve the key ideas, goals, and strategies while making the text clear and impactful. The summary should logically cover the purpose, timeline, and planned actions of the initiative described in the elaboration. The summary must start with a title that is relevant to the content of the elaboration. The title and the summary must be separated by ### on a new line. The response should contain only the title and the summary, without any additional text. Tabular Overview Extract key information from the elaboration document and format it into a structured text-based table. The table must include the following exact sections, written in Serbian Cyrillic: ОПИС Циљ Циљна група Бројност Ризик (репресија, спиновање) Импакт Напомена ПРОЦЕДУРА Тип Сатница Место Тон акције Обавезне акције Актери Трасе Безбедност Ширење информација The output must strictly follow this structure. No additional sections should be included. The response should be in plain text without any extra formatting, decorations, or symbols. Important Requirements: The response should only contain the generated content for "Idiot" and "Tabular Overview". No introductory or explanatory text should be included. The two sections must be separated by a unique delimiter: %%% (three percentage signs). No decorative elements (such as asterisks, dashes, or additional formatting) should be present. The response must be in Serbian Cyrillic. Input: The full text of the elaboration document is provided below. Use this content as the source material for generating the required outputs. Output Format: ИДИОТ (Сажетак у 300 речи) - Serbian Cyrillic Title (contextual and relevant) ### (Separator between title and summary) Summary text %%% (Separator between the two documents) Табеларни приказ (Structured Table) - Serbian Cyrillic';
 
         // Read the file content and encode it in base64
         $fileContent = file_get_contents($elaboratFile->getPathname());
@@ -37,7 +37,7 @@ class GeminiService {
                                 'data' => $base64FileContent,
                                 'mime_type' => $elaboratFile->getMimeType(),
                             ],
-                        ]
+                        ],
                     ],
                 ],
             ],
@@ -51,7 +51,8 @@ class GeminiService {
 
             $body = json_decode($response->getBody(), TRUE);
             return $body['candidates'][0]['content']['parts'][0]['text'] ?? 'No response';
-        } catch (RequestException $e) {
+        }
+        catch (RequestException $e) {
             return $e->getMessage();
         }
     }
