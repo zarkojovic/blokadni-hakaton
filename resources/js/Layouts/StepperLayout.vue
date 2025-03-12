@@ -56,7 +56,7 @@ const uploadEvent = (callback) => {
         const formData = new FormData();
         formData.append('elaboratFile', filesMy.value); // Dodajte fajl
         formData.append('type', 'content'); // Dodajte fajl
-
+        console.log(filesMy.value);
         // Pošaljite zahtev koristeći axios
         loader.value = true;
         axios.post(route('gemini.documents'), formData, {
