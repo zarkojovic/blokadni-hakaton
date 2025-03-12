@@ -17,30 +17,29 @@ const active = ref('0');
                 O Nama
             </h2>
         </template>
-    <main class="w-10/12 mx-auto">
+    <main class="mt-2 w-10/12 mx-auto">
         <div class="bg-white dark:bg-gray-800 dark:text-gray-200">
             <div class="flex mb-4 gap-2 justify-end">
                 <Button @click="active = '0'" rounded label="1" class="w-8 h-8 p-0" :outlined="active !== '0'" />
                 <Button @click="active = '1'" rounded label="2" class="w-8 h-8 p-0" :outlined="active !== '1'" />
                 <Button @click="active = '2'" rounded label="3" class="w-8 h-8 p-0" :outlined="active !== '2'" />
+                <Button @click="active = '3'" rounded label="3" class="w-8 h-8 p-0" :outlined="active !== '3'" />
             </div>
 
             <Accordion v-model:value="active">
                 <AccordionPanel value="0">
-                    <AccordionHeader>Zašto baš mi?</AccordionHeader>
+                    <AccordionHeader>Koja je svrha aplikacije?</AccordionHeader>
                     <AccordionContent>
                         <p class="m-0">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            Svrha Elaboratora je da automatski pretvori kompleksne elaborat fajlove u jasan idiot i tabelarni prikaz, kako bi se ideje i planovi akcije brže i efikasnije formirale.
                         </p>
                     </AccordionContent>
                 </AccordionPanel>
                 <AccordionPanel value="1">
-                    <AccordionHeader>Kome služi aplikacije?</AccordionHeader>
+                    <AccordionHeader>Kome služi aplikacija?</AccordionHeader>
                     <AccordionContent>
                         <p class="m-0">
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-                            ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
+                            Aplikacija prvenstveno služi pripadnicima radnih grupa koji učestvuju u pisanju predloga tokom studentskih blokada. One su trenutno zadužene za ubrzavanje izrade idiot fajlova i tabela.najviše olakšava posao.
                         </p>
                     </AccordionContent>
                 </AccordionPanel>
@@ -48,8 +47,15 @@ const active = ref('0');
                     <AccordionHeader>Kako je nastala aplikacija?</AccordionHeader>
                     <AccordionContent>
                         <p class="m-0">
-                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa
-                            qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+                            Aplikacija je nastala na blokadnom hakatonu koji se održao na FON-u 11-12. marta 2025. godine, u toku studentskih blokada. Ideja je potekla iz razgovora sa pripadnicima radnih grupa koji su nama podelili svoj način rada.
+                        </p>
+                    </AccordionContent>
+                </AccordionPanel>
+                <AccordionPanel value="3">
+                    <AccordionHeader>Da li neko može da dođe u posed mojim fajlovima?</AccordionHeader>
+                    <AccordionContent>
+                        <p class="m-0">
+                            Ne, niko ne može doći u posed vaših fajlova. Fajlovi se ne čuvaju se nigde. Nakon generisanja sažetka i tabele, svi podaci se brišu automatski. Privatnost korisnika, sigurnost budućih predloga i radnih akcija su nam prioritet od početka.
                         </p>
                     </AccordionContent>
                 </AccordionPanel>
