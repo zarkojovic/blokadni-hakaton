@@ -100,9 +100,11 @@ const submit = () => {
                         </form>
 
 
-                        <a v-if="idiotLink" :href="idiotLink" target="_blank" class="mt-6 block text-blue-500 underline">Idiot
+                        <a v-if="idiotLink" :href="idiotLink" target="_blank"
+                           class="mt-6 block text-blue-500 underline">Idiot
                             link</a>
-                        <a v-if="tabelarView" :href="tabelarView" target="_blank" class="mt-6 block text-blue-500 underline">Tabelar
+                        <a v-if="tabelarView" :href="tabelarView" target="_blank"
+                           class="mt-6 block text-blue-500 underline">Tabelar
                             view</a>
                     </div>
                 </div>

@@ -112,7 +112,7 @@ class DocumentService {
 
         // First row: single cell with "ОПИС"
         $table->addRow();
-        $cell = $table->addCell(9000, ['gridSpan' => 2]);
+        $cell = $table->addCell(9000, ['gridSpan' => 3]);
         $cell->addText("ОПИС", ['bold' => TRUE, 'size' => 14],
             ['alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER]);
 
@@ -190,7 +190,7 @@ class DocumentService {
         return asset('tabular_overviews/'.$file);
     }
 
-    private function parseTextToKeyValueArray($text) {
+    public function parseTextToKeyValueArray($text) {
         $result = [];
         foreach ($this->keys as $key) {
             // Kreiranje regexa koji traži vrednost nakon ključne reči
