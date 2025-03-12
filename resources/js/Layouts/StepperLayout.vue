@@ -10,6 +10,7 @@ import axios from 'axios';
 import Navigation from '@/Components/layout/Navigation.vue';
 import ProgressSpinner from 'primevue/progressspinner';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import {PhDownload} from '@phosphor-icons/vue';
 
 const totalSize = ref(0);
 const totalSizePercent = ref(0);
@@ -315,11 +316,14 @@ const handleChange = (event, key) => {
                         <h1 class="text-xl mb-3 font-bold">Tvoji dokumenti su spremni! 🫡</h1>
                         <div class=" rounded-border grid grid-cols-2 items-center gap-4">
                             <a :href="idiotLink" target="_blank"
-                               class="flex items-center justify-center rounded-lg text-lg py-10 border font-bold">Skini
-                                Idiota 💾</a>
+                               class="flex items-center justify-center rounded-lg text-lg py-10 border font-bold">Preuzmi
+                                Idiota <PhDownload :size="32" />
+                            </a>
                             <a :href="tabelarView" target="_blank"
-                               class="flex items-center justify-center rounded-lg py-10 border font-bold">Skini tablarni
-                                prikaz 💾</a>
+                               class="flex items-center justify-center rounded-lg py-10 border font-bold">Preuzmi tablarni
+                                prikaz <PhDownload :size="32" />
+
+                            </a>
                         </div>
                         <Button label="Generiši opet" icon="pi pi-angle-left" class="mt-4"
                                 @click="restartForm"/>
