@@ -1,12 +1,7 @@
 <script setup>
-import Stepper from 'primevue/stepper';
 import StepList from 'primevue/steplist';
-import StepPanels from 'primevue/steppanels';
 import {PhUpload, PhEye, PhTable} from "@phosphor-icons/vue";
-import Button from 'primevue/button';
-import StepItem from 'primevue/stepitem';
 import Step from 'primevue/step';
-import StepPanel from 'primevue/steppanel';
 </script>
 
 <template>
@@ -27,11 +22,10 @@ import StepPanel from 'primevue/steppanel';
     </div>
 </template>
 <style>
-.p-step-header .p-step-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-}
-
+    .p-step-header .p-step-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+    }
 </style>

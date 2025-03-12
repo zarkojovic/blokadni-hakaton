@@ -46,9 +46,7 @@ class DocumentService {
 
         // Generate timestamp
         $timestamp = Carbon::now()->format('Ymd_His');
-
         [$title, $content] = explode('###', $response);
-
         // Create the document section
         $section = $phpWord->addSection();
 
