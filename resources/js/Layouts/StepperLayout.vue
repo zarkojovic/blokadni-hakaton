@@ -304,10 +304,10 @@ const handleChange = (event, key) => {
                     </div>
                     <div class="flex justify-between">
                         <Button @click="activeTab = '2'"
-                                label="Previous"
+                                label="Nazad"
                                 icon="pi pi-angle-left mx-auto"
                                 class="mt-4"/>
-                        <Button @click="finishDocuments" label="Finish" icon="pi pi-check mx-auto"
+                        <Button @click="finishDocuments" label="Završi" icon="pi pi-check mx-auto"
                                 class="mt-4"/>
                     </div>
                 </StepPanel>
@@ -316,13 +316,20 @@ const handleChange = (event, key) => {
                         <h1 class="text-xl mb-3 font-bold">Tvoji dokumenti su spremni! 🫡</h1>
                         <div class=" rounded-border grid grid-cols-2 items-center gap-4">
                             <a :href="idiotLink" target="_blank"
-                               class="flex items-center justify-center rounded-lg text-lg py-10 border font-bold">Preuzmi
-                                Idiota <PhDownload :size="32" />
+                               class="flex items-center justify-center rounded-lg text-lg py-10 border font-bold">
+                                <div class="flex justify-center flex-col items-center">
+                                    Preuzmi
+                                    Idiota
+                                    <PhDownload :size="28"/>
+                                </div>
                             </a>
                             <a :href="tabelarView" target="_blank"
-                               class="flex items-center justify-center rounded-lg py-10 border font-bold">Preuzmi tablarni
-                                prikaz <PhDownload :size="32" />
-
+                               class="flex items-center justify-center rounded-lg py-10 border text-lg font-bold text-center">
+                                <div class="flex justify-center flex-col items-center">
+                                    Preuzmi tablarni
+                                    prikaz
+                                    <PhDownload :size="28"/>
+                                </div>
                             </a>
                         </div>
                         <Button label="Generiši opet" icon="pi pi-angle-left" class="mt-4"
