@@ -25,6 +25,13 @@ class GeminiService {
         $fileContent = file_get_contents($elaboratFile->getPathname());
         $base64FileContent = base64_encode($fileContent);
 
+        $mimeType = $elaboratFile->getMimeType();
+        if (!in_array($mimeType, [
+            'application/pdf',
+        ])) {
+            return 'Unsupported file type';
+        }
+
         $data = [
             'contents' => [
                 [

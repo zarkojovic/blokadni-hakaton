@@ -133,9 +133,53 @@ class DocumentService {
             if (isset($tableValues[$key])) {
                 $table->addRow();
                 $table->addCell(3000)->addText($key, ['bold' => TRUE]);
-                $table->addCell(6000)->addText($tableValues[$key]);
+                $table->addCell(6000, ['gridSpan' => 2])
+                    ->addText($tableValues[$key]);
             }
         }
+        $table->addRow();
+        $table->addCell(6000, ['gridSpan' => 2])
+            ->addText('ПРОЦЕДУРА', ['bold' => TRUE]);
+        $table->addCell(3000)->addText('Аутономија');
+
+        // Define the keys to include
+        $keys = [
+            "Тип",
+            "Сатница",
+            "Место",
+            "Тон акције",
+            "Обавезне акције",
+            "Актери",
+            "Трасе",
+            "Безбедност",
+            "Ширење информација",
+        ];
+        foreach ($keys as $key) {
+            if (isset($tableValues[$key])) {
+                $table->addRow();
+                $table->addCell(3000)->addText($key, ['bold' => TRUE]);
+                $table->addCell(3000)->addText($tableValues[$key]);
+                $table->addCell(3000)->addText('');
+            }
+        }
+
+        $section->addText("ЛЕГЕНДА АУТОНОМИЈЕ", $titleStyle);
+
+        // generate me a new table with 5 columns and one row with 5 cells with different colors
+        $table = $section->addTable($tableStyle);
+        $table->addRow();
+        $table->addCell(2000)->addText('Аутономија', ['bold' => TRUE]);
+        $table->addCell(2000, ['bgColor' => 'D08370'])
+            ->addText('КРГС +радионице',
+                ['bold' => TRUE]);
+        $table->addCell(2000, ['bgColor' => 'FFFF54'])
+            ->addText('', ['bold' => TRUE]);
+        $table->addCell(2000, ['bgColor' => '5885E1'])
+            ->addText('КРГБ +ванредни редари',
+                ['bold' => TRUE]);
+        $table->addCell(2000, ['bgColor' => 'F19E38'])
+            ->addText('КРГМ +ЛОКАЛНЕ РГМ',
+                ['bold' => TRUE]);
 
         // Define file path
         $file = 'Tabular_Overview_'.$timestamp.'.docx';
