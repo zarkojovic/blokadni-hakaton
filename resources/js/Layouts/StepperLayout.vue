@@ -267,7 +267,7 @@ const handleChange = (event, key) => {
                         <div class="flex flex-col gap-1 mt-4">
                         <textarea
                             v-model="data"
-                            rows="30"
+                            rows="15"
                             class="p-4 border rounded-lg bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">{{data}}</textarea>
                         </div>
                     </div>
