@@ -149,8 +149,26 @@ const finishDocuments = () => {
     });
 };
 
+const deleteFilesForm = useForm({
+    idiotLink: '',
+    tabularLink: '',
+});
+
 const restartForm = () => {
-    window.location.href = '/';
+    deleteFilesForm.idiotLink = idiotLink.value;
+    deleteFilesForm.tabularLink = tabelarView.value;
+
+    deleteFilesForm.delete(route('gemini.documents.delete'), {
+        preserveScroll: true,
+        onSuccess: (page) => {
+            window.location.href = '/';
+        },
+        onError: (errors) => {
+            deleteFilesForm.errors = errors;
+            console.log(errors);
+        },
+    });
+
 };
 
 const emptyTableData = ref(false);
@@ -347,7 +365,6 @@ const handleChange = (event, key) => {
             <!--        </main>-->
         </Stepper>
     </AuthenticatedLayout>
-
 
 
 </template>

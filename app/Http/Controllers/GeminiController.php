@@ -57,4 +57,26 @@ class GeminiController extends Controller {
         return Inertia::render('Home', $fileUrls);
     }
 
+    public function deleteDocuments(Request $request) {
+        $idiotLink = $request->input('idiotLink');
+        $tabularLink = $request->input('tabularLink');
+        if ($idiotLink) {
+            $path = explode('/idiots', $idiotLink);
+            $idiotFilePath = public_path('/idiots'.$path[1]);
+            if (file_exists($idiotFilePath)) {
+                unlink($idiotFilePath);
+            }
+        }
+
+        if ($tabularLink) {
+            $path = explode('/tabular_overviews', $tabularLink);
+            $tabularFilePath = public_path('/tabular_overviews'.$path[1]);
+            if (file_exists($tabularFilePath)) {
+                unlink($tabularFilePath);
+            }
+        }
+
+        return Inertia::render('Home');
+    }
+
 }
